@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 public class OrderMapper {
 
     public static Order toDomainModel(OrderEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return Order.builder()
             .id(entity.getId())
             .member(MemberMapper.toDomainModel(entity.getMember()))

@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 public class OrderItemMapper {
 
     public static OrderItem toDomainModel(OrderItemEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return OrderItem.builder()
             .id(entity.getId())
             .item(ItemMapper.toDomainModel(entity.getItem()))
@@ -26,6 +29,9 @@ public class OrderItemMapper {
     }
 
     public static OrderItemEntity toEntity(OrderItem orderItem) {
+        if (orderItem == null) {
+            return null;
+        }
         return OrderItemEntity.builder()
             .id(orderItem.getId())
             .item(ItemMapper.toEntity(orderItem.getItem()))

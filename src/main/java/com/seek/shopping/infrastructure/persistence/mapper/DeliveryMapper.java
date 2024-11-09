@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 public class DeliveryMapper {
 
     public static Delivery toDomainModel(DeliveryEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return Delivery.builder()
             .id(entity.getId())
             .address(AddressMapper.toDomainModel(entity.getAddress()))
@@ -16,11 +19,14 @@ public class DeliveryMapper {
             .build();
     }
 
-    public static DeliveryEntity toEntity(Delivery domainModel) {
+    public static DeliveryEntity toEntity(Delivery delivery) {
+        if (delivery == null) {
+            return null;
+        }
         return DeliveryEntity.builder()
-            .id(domainModel.getId())
-            .address(AddressMapper.toEntity(domainModel.getAddress()))
-            .status(domainModel.getStatus())
+            .id(delivery.getId())
+            .address(AddressMapper.toEntity(delivery.getAddress()))
+            .status(delivery.getStatus())
             .build();
     }
 }

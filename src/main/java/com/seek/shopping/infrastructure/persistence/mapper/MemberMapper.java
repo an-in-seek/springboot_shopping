@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 public class MemberMapper {
 
     public static Member toDomainModel(MemberEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return Member.builder()
             .id(entity.getId())
             .name(entity.getName())
@@ -17,12 +20,15 @@ public class MemberMapper {
             .build();
     }
 
-    public static MemberEntity toEntity(Member domainModel) {
+    public static MemberEntity toEntity(Member member) {
+        if (member == null) {
+            return null;
+        }
         return MemberEntity.builder()
-            .id(domainModel.getId())
-            .name(domainModel.getName())
-            .email(domainModel.getEmail())
-            .address(AddressMapper.toEntity(domainModel.getAddress()))
+            .id(member.getId())
+            .name(member.getName())
+            .email(member.getEmail())
+            .address(AddressMapper.toEntity(member.getAddress()))
             .build();
     }
 }

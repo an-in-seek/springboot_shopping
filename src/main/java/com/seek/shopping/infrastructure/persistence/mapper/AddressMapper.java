@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 public class AddressMapper {
 
     public static Address toDomainModel(AddressEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return Address.builder()
             .id(entity.getId())
             .city(entity.getCity())
@@ -17,12 +20,15 @@ public class AddressMapper {
             .build();
     }
 
-    public static AddressEntity toEntity(Address domainModel) {
+    public static AddressEntity toEntity(Address address) {
+        if (address == null) {
+            return null;
+        }
         return AddressEntity.builder()
-            .id(domainModel.getId())
-            .city(domainModel.getCity())
-            .street(domainModel.getStreet())
-            .zipcode(domainModel.getZipcode())
+            .id(address.getId())
+            .city(address.getCity())
+            .street(address.getStreet())
+            .zipcode(address.getZipcode())
             .build();
     }
 }

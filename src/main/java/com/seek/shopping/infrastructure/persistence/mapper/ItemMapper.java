@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 public class ItemMapper {
 
     public static Item toDomainModel(ItemEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return Item.builder()
             .id(entity.getId())
             .name(entity.getName())
@@ -18,12 +21,15 @@ public class ItemMapper {
             .build();
     }
 
-    public static ItemEntity toEntity(Item domainModel) {
+    public static ItemEntity toEntity(Item item) {
+        if (item == null) {
+            return null;
+        }
         return ItemEntity.builder()
-            .id(domainModel.getId())
-            .name(domainModel.getName())
-            .price(domainModel.getPrice().value())
-            .stockQuantity(domainModel.getStockQuantity())
+            .id(item.getId())
+            .name(item.getName())
+            .price(item.getPrice().value())
+            .stockQuantity(item.getStockQuantity())
             .build();
     }
 }
