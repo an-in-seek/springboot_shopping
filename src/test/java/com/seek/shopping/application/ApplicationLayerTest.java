@@ -2,13 +2,13 @@ package com.seek.shopping.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.seek.jpa.study.IntegrationTest;
+import com.seek.shopping.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @DisplayName("애플리케이션 계층 테스트")
-public class ApplicationLayerTest extends IntegrationTest  {
+public class ApplicationLayerTest extends IntegrationTest {
 
     @Autowired
     private MemberFacade memberFacade;

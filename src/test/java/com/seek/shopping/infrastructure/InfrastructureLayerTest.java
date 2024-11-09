@@ -2,9 +2,9 @@ package com.seek.shopping.infrastructure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.seek.jpa.study.IntegrationTest;
-import com.seek.jpa.study.infrastructure.persistence.MemberEntity;
-import com.seek.jpa.study.infrastructure.persistence.MemberJpaRepository;
+import com.seek.shopping.IntegrationTest;
+import com.seek.shopping.infrastructure.persistence.entity.MemberEntity;
+import com.seek.shopping.infrastructure.persistence.repository.MemberJpaRepository;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ public class InfrastructureLayerTest extends IntegrationTest {
     @DisplayName("Member 생성 테스트")
     void testCreateMember() {
         // given
-        final String username = "seek";
+        final String name = "seek";
         final String email = "seek1@naver.com";
         final MemberEntity memberEntity = MemberEntity.builder()
-            .username(username)
+            .name(name)
             .email(email)
             .build();
 
@@ -32,7 +32,7 @@ public class InfrastructureLayerTest extends IntegrationTest {
 
         // then
         assertThat(createdMember.getId()).isNotNull();
-        assertThat(createdMember.getUsername()).isNotNull().isEqualTo(username);
+        assertThat(createdMember.getName()).isNotNull().isEqualTo(name);
         assertThat(createdMember.getEmail()).isNotNull().isEqualTo(email);
     }
 
@@ -40,10 +40,10 @@ public class InfrastructureLayerTest extends IntegrationTest {
     @DisplayName("Member 조회 테스트")
     void testFindMember() {
         // given
-        final String username = "seek";
+        final String name = "seek";
         final String email = "seek1@naver.com";
         final MemberEntity memberEntity = MemberEntity.builder()
-            .username(username)
+            .name(name)
             .email(email)
             .build();
         final Long createdMemberId = memberJpaRepository.saveAndFlush(memberEntity).getId();
@@ -54,7 +54,7 @@ public class InfrastructureLayerTest extends IntegrationTest {
         // then
         assertThat(member).isPresent();
         assertThat(member.get().getId()).isNotNull().isEqualTo(createdMemberId);
-        assertThat(member.get().getUsername()).isNotNull().isEqualTo(username);
+        assertThat(member.get().getName()).isNotNull().isEqualTo(name);
         assertThat(member.get().getEmail()).isNotNull().isEqualTo(email);
     }
 }
