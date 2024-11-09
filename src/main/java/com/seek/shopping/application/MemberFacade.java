@@ -1,7 +1,7 @@
 package com.seek.shopping.application;
 
 import com.seek.shopping.domain.Member;
-import com.seek.shopping.domain.service.MemberCommandService;
+import com.seek.shopping.domain.MemberCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
