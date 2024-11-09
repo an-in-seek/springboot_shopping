@@ -1,5 +1,12 @@
-package com.seek.shopping.domain;
+package com.seek.shopping.domain.service;
 
+import com.seek.shopping.domain.Delivery;
+import com.seek.shopping.domain.DeliveryStatus;
+import com.seek.shopping.domain.Item;
+import com.seek.shopping.domain.Member;
+import com.seek.shopping.domain.Order;
+import com.seek.shopping.domain.OrderItem;
+import com.seek.shopping.infrastructure.persistence.entity.OrderEntity;
 import com.seek.shopping.infrastructure.persistence.mapper.ItemMapper;
 import com.seek.shopping.infrastructure.persistence.mapper.MemberMapper;
 import com.seek.shopping.infrastructure.persistence.mapper.OrderMapper;
@@ -42,7 +49,8 @@ public class OrderCommandService {
         Order order = Order.createOrder(member, delivery, orderItem);
 
         //주문 저장
-        return orderJpaRepository.save(OrderMapper.toEntity(order)).getId();
+        OrderEntity orderEntity = OrderMapper.toEntity(order);
+        return orderJpaRepository.save(orderEntity).getId();
     }
 
     public void cancelOrder(Long orderId) {

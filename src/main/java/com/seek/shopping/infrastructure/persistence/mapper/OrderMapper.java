@@ -3,6 +3,8 @@ package com.seek.shopping.infrastructure.persistence.mapper;
 import com.seek.shopping.domain.Money;
 import com.seek.shopping.domain.Order;
 import com.seek.shopping.infrastructure.persistence.entity.OrderEntity;
+import com.seek.shopping.infrastructure.persistence.entity.OrderItemEntity;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -21,15 +23,20 @@ public class OrderMapper {
             .build();
     }
 
-    public static OrderEntity toEntity(Order domainModel) {
-        return OrderEntity.builder()
-            .id(domainModel.getId())
-            .member(MemberMapper.toEntity(domainModel.getMember()))
-            .delivery(DeliveryMapper.toEntity(domainModel.getDelivery()))
-            .orderItems(OrderItemMapper.toEntity(domainModel.getOrderItems()))
-            .orderStatus(domainModel.getOrderStatus())
-            .totalAmounts(domainModel.getTotalAmounts().value())
-            .orderDate(domainModel.getOrderDate())
+    public static OrderEntity toEntity(Order order) {
+        if (order == null) {
+            return null;
+        }
+        OrderEntity orderEntity = OrderEntity.builder()
+            .id(order.getId())
+            .member(MemberMapper.toEntity(order.getMember()))
+            .delivery(DeliveryMapper.toEntity(order.getDelivery()))
+            .orderStatus(order.getOrderStatus())
+            .totalAmounts(order.getTotalAmounts().value())
+            .orderDate(order.getOrderDate())
             .build();
+        List<OrderItemEntity> orderItemEntities = OrderItemMapper.toEntity(order.getOrderItems());
+        orderItemEntities.forEach(orderItem -> orderItem.setOrder(orderEntity));
+        return orderEntity;
     }
 }

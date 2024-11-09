@@ -8,21 +8,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberMapper {
 
-    // 엔티티를 도메인 모델로 변환
     public static Member toDomainModel(MemberEntity entity) {
         return Member.builder()
             .id(entity.getId())
             .name(entity.getName())
             .email(entity.getEmail())
+            .address(AddressMapper.toDomainModel(entity.getAddress()))
             .build();
     }
 
-    // 도메인 모델을 엔티티로 변환
     public static MemberEntity toEntity(Member domainModel) {
         return MemberEntity.builder()
             .id(domainModel.getId())
             .name(domainModel.getName())
             .email(domainModel.getEmail())
+            .address(AddressMapper.toEntity(domainModel.getAddress()))
             .build();
     }
 }

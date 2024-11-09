@@ -1,6 +1,5 @@
 package com.seek.shopping.infrastructure.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,7 +29,6 @@ public class OrderItemEntity extends BaseEntity {
     @JoinColumn(name = "item_id")
     private ItemEntity item;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private OrderEntity order;
@@ -40,4 +38,12 @@ public class OrderItemEntity extends BaseEntity {
 
     @Column(name = "count")
     private int count;
+
+    @Column(name = "amounts")
+    private BigDecimal amounts;
+
+    public void setOrder(OrderEntity orderEntity) {
+        this.order = orderEntity;
+        orderEntity.getOrderItems().add(this);
+    }
 }

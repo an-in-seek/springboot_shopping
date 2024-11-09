@@ -1,5 +1,6 @@
-package com.seek.shopping.domain;
+package com.seek.shopping.domain.service;
 
+import com.seek.shopping.domain.Member;
 import com.seek.shopping.infrastructure.persistence.entity.MemberEntity;
 import com.seek.shopping.infrastructure.persistence.mapper.MemberMapper;
 import com.seek.shopping.infrastructure.persistence.repository.MemberJpaRepository;

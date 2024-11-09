@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -32,16 +33,19 @@ public class CategoryEntity extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    @Default
     @ManyToMany
     @JoinTable(name = "category_item",
         joinColumns = @JoinColumn(name = "category_id"),
-        inverseJoinColumns = @JoinColumn(name = "item_id"))
+        inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
     private List<ItemEntity> items = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private CategoryEntity parent;
 
+    @Default
     @OneToMany(mappedBy = "parent")
     private List<CategoryEntity> child = new ArrayList<>();
 

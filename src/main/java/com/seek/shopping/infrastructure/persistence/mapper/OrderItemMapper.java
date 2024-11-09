@@ -4,6 +4,7 @@ import com.seek.shopping.domain.Money;
 import com.seek.shopping.domain.OrderItem;
 import com.seek.shopping.infrastructure.persistence.entity.OrderItemEntity;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -14,9 +15,9 @@ public class OrderItemMapper {
         return OrderItem.builder()
             .id(entity.getId())
             .item(ItemMapper.toDomainModel(entity.getItem()))
-            .order(OrderMapper.toDomainModel(entity.getOrder()))
             .orderPrice(Money.from(entity.getOrderPrice()))
             .count(entity.getCount())
+            .amounts(Money.from(entity.getAmounts()))
             .build();
     }
 
@@ -24,17 +25,19 @@ public class OrderItemMapper {
         return entities.stream().map(OrderItemMapper::toDomainModel).toList();
     }
 
-    public static OrderItemEntity toEntity(OrderItem domainModel) {
+    public static OrderItemEntity toEntity(OrderItem orderItem) {
         return OrderItemEntity.builder()
-            .id(domainModel.getId())
-            .item(ItemMapper.toEntity(domainModel.getItem()))
-            .order(OrderMapper.toEntity(domainModel.getOrder()))
-            .orderPrice(domainModel.getOrderPrice().value())
-            .count(domainModel.getCount())
+            .id(orderItem.getId())
+            .item(ItemMapper.toEntity(orderItem.getItem()))
+            .orderPrice(orderItem.getOrderPrice().value())
+            .count(orderItem.getCount())
+            .amounts(orderItem.getAmounts().value())
             .build();
     }
 
-    public static List<OrderItemEntity> toEntity(List<OrderItem> entities) {
-        return entities.stream().map(OrderItemMapper::toEntity).toList();
+    public static List<OrderItemEntity> toEntity(List<OrderItem> orderItems) {
+        return orderItems.stream()
+            .map(OrderItemMapper::toEntity)
+            .collect(Collectors.toList());
     }
 }

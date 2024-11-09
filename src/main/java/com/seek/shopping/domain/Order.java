@@ -1,8 +1,10 @@
 package com.seek.shopping.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +20,8 @@ public class Order extends BaseDomainModel {
 
     private Member member;
 
-    private List<OrderItem> orderItems = List.of();
+    @Default
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private Delivery delivery;
 
@@ -31,14 +34,17 @@ public class Order extends BaseDomainModel {
     private LocalDateTime orderDate;
 
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
-        return Order.builder()
+        Order order = Order.builder()
             .member(member)
             .delivery(delivery)
-            .orderItems(List.of(orderItems))
             .orderStatus(OrderStatus.PAYMENT_WAITING)
             .totalAmounts(getTotalAmounts(List.of(orderItems)))
             .orderDate(LocalDateTime.now())
             .build();
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        return order;
     }
 
     public void setMember(Member member) {
@@ -53,7 +59,9 @@ public class Order extends BaseDomainModel {
     }
 
     public void addOrderItem(OrderItem orderItem) {
+        verifyAtLeastOneOrMoreOrderItems(List.of(orderItem));
         this.orderItems.add(orderItem);
+        this.setTotalAmounts(getTotalAmounts(orderItems));
         orderItem.setOrder(this);
     }
 

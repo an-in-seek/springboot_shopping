@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -35,6 +34,6 @@ public class ItemEntity extends BaseEntity {
     private int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
-    private List<CategoryEntity> categories = new ArrayList<>();
+    private List<CategoryEntity> categories;
 
 }

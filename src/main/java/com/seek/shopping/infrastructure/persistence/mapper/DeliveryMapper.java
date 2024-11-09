@@ -13,7 +13,6 @@ public class DeliveryMapper {
             .id(entity.getId())
             .address(AddressMapper.toDomainModel(entity.getAddress()))
             .status(entity.getStatus())
-            .order(OrderMapper.toDomainModel(entity.getOrder()))
             .build();
     }
 
@@ -22,7 +21,6 @@ public class DeliveryMapper {
             .id(domainModel.getId())
             .address(AddressMapper.toEntity(domainModel.getAddress()))
             .status(domainModel.getStatus())
-            .order(OrderMapper.toEntity(domainModel.getOrder()))
             .build();
     }
 }

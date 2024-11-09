@@ -1,7 +1,9 @@
 package com.seek.shopping.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -12,10 +14,15 @@ import lombok.experimental.SuperBuilder;
 public class Member extends BaseDomainModel {
 
     private Long id;
+
     private String name;
+
     private String email;
+
     private Address address;
-    private List<Order> orders = List.of();
+
+    @Default
+    private List<Order> orders = new ArrayList<>();
 
     protected Member(Long id, String name, String email) {
         this.id = id;

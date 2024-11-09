@@ -30,5 +30,19 @@ public record Money(
         return this.value.compareTo(other.value);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Money money)) {
+            return false;
+        }
+        return this.value.compareTo(money.value) == 0; // 값이 동일하면 true
+    }
 
+    @Override
+    public int hashCode() {
+        return value.stripTrailingZeros().hashCode(); // 동일한 값은 동일한 해시코드
+    }
 }
