@@ -1,6 +1,6 @@
 package com.seek.shopping.infrastructure.persistence.mapper;
 
-import com.seek.shopping.domain.Address;
+import com.seek.shopping.domain.model.Address;
 import com.seek.shopping.infrastructure.persistence.entity.AddressEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

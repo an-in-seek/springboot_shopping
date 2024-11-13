@@ -1,7 +1,7 @@
 package com.seek.shopping.infrastructure.persistence.mapper;
 
-import com.seek.shopping.domain.Item;
-import com.seek.shopping.domain.Money;
+import com.seek.shopping.domain.model.Item;
+import com.seek.shopping.domain.model.Money;
 import com.seek.shopping.infrastructure.persistence.entity.ItemEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

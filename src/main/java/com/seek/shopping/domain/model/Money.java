@@ -1,4 +1,4 @@
-package com.seek.shopping.domain;
+package com.seek.shopping.domain.model;
 
 import java.math.BigDecimal;
 

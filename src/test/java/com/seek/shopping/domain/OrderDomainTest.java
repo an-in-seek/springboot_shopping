@@ -3,6 +3,9 @@ package com.seek.shopping.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seek.shopping.IntegrationTest;
+import com.seek.shopping.domain.model.Money;
+import com.seek.shopping.domain.model.Order;
+import com.seek.shopping.domain.model.OrderStatus;
 import com.seek.shopping.domain.service.OrderCommandService;
 import com.seek.shopping.domain.service.OrderQueryService;
 import com.seek.shopping.infrastructure.persistence.entity.AddressEntity;

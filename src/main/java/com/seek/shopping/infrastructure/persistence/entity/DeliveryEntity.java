@@ -1,7 +1,7 @@
 package com.seek.shopping.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.seek.shopping.domain.DeliveryStatus;
+import com.seek.shopping.domain.model.DeliveryStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

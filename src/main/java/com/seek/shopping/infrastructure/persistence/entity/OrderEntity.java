@@ -1,6 +1,6 @@
 package com.seek.shopping.infrastructure.persistence.entity;
 
-import com.seek.shopping.domain.OrderStatus;
+import com.seek.shopping.domain.model.OrderStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

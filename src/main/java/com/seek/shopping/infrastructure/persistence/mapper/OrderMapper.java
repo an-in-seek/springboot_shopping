@@ -1,7 +1,7 @@
 package com.seek.shopping.infrastructure.persistence.mapper;
 
-import com.seek.shopping.domain.Money;
-import com.seek.shopping.domain.Order;
+import com.seek.shopping.domain.model.Money;
+import com.seek.shopping.domain.model.Order;
 import com.seek.shopping.infrastructure.persistence.entity.OrderEntity;
 import com.seek.shopping.infrastructure.persistence.entity.OrderItemEntity;
 import java.util.List;

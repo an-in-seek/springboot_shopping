@@ -1,7 +1,7 @@
 package com.seek.shopping.domain.service;
 
-import com.seek.shopping.domain.Order;
-import com.seek.shopping.domain.OrderStatus;
+import com.seek.shopping.domain.model.Order;
+import com.seek.shopping.domain.model.OrderStatus;
 import com.seek.shopping.infrastructure.persistence.mapper.OrderMapper;
 import com.seek.shopping.infrastructure.persistence.repository.OrderJpaRepository;
 import java.util.List;

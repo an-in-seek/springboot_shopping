@@ -3,6 +3,7 @@ package com.seek.shopping.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.seek.shopping.IntegrationTest;
+import com.seek.shopping.domain.model.Member;
 import com.seek.shopping.domain.service.MemberCommandService;
 import com.seek.shopping.domain.service.MemberQueryService;
 import com.seek.shopping.infrastructure.persistence.repository.MemberJpaRepository;

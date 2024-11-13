@@ -1,6 +1,6 @@
 package com.seek.shopping.application;
 
-import com.seek.shopping.domain.Member;
+import com.seek.shopping.domain.model.Member;
 import com.seek.shopping.domain.service.MemberCommandService;
 import com.seek.shopping.domain.service.MemberQueryService;
 import java.util.Optional;

@@ -1,11 +1,11 @@
 package com.seek.shopping.domain.service;
 
-import com.seek.shopping.domain.Delivery;
-import com.seek.shopping.domain.DeliveryStatus;
-import com.seek.shopping.domain.Item;
-import com.seek.shopping.domain.Member;
-import com.seek.shopping.domain.Order;
-import com.seek.shopping.domain.OrderItem;
+import com.seek.shopping.domain.model.Delivery;
+import com.seek.shopping.domain.model.DeliveryStatus;
+import com.seek.shopping.domain.model.Item;
+import com.seek.shopping.domain.model.Member;
+import com.seek.shopping.domain.model.Order;
+import com.seek.shopping.domain.model.OrderItem;
 import com.seek.shopping.infrastructure.persistence.entity.OrderEntity;
 import com.seek.shopping.infrastructure.persistence.mapper.ItemMapper;
 import com.seek.shopping.infrastructure.persistence.mapper.MemberMapper;
