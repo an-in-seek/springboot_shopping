@@ -82,6 +82,65 @@ class OrderDomainTest extends IntegrationTest {
         assertThat(order.get().getOrderDate()).isNotNull();
     }
 
+    @Test
+    @DisplayName("주문 조회 테스트")
+    void testFindOrder() {
+        // given
+        final Long orderId = orderCommandService.order(memberId, itemId, ORDER_COUNT);
+
+        // when
+        final Optional<Order> order = orderQueryService.getOrderById(orderId);
+
+        // then
+        assertThat(order).isPresent();
+        assertThat(order.get()).isNotNull();
+        assertThat(order.get().getId()).isNotNull().isEqualTo(orderId);
+        assertThat(order.get().getMember().getId()).isNotNull().isEqualTo(memberId);
+        assertThat(order.get().getMember().getEmail()).isNotNull().isEqualTo(MEMBER_EMAIL);
+        assertThat(order.get().getMember().getName()).isNotNull().isEqualTo(MEMBER_NAME);
+        assertThat(order.get().getOrderItems()).isNotEmpty().hasSize(1);
+        assertThat(order.get().getOrderItems().get(0).getItem().getId()).isNotNull().isEqualTo(itemId);
+        assertThat(order.get().getOrderItems().get(0).getItem().getName()).isNotNull().isEqualTo(ITEM_NAME);
+        assertThat(order.get().getOrderItems().get(0).getItem().getPrice()).isNotNull().isEqualTo(ITEM_PRICE);
+        assertThat(order.get().getOrderItems().get(0).getItem().getStockQuantity()).isNotNull().isEqualTo(ITEM_STOCK_QUANTITY);
+        assertThat(order.get().getOrderItems().get(0).getOrderPrice()).isNotNull().isEqualTo(ITEM_PRICE);
+        assertThat(order.get().getOrderItems().get(0).getCount()).isNotNull().isEqualTo(ORDER_COUNT);
+        assertThat(order.get().getOrderItems().get(0).getAmounts()).isNotNull().isEqualTo(ITEM_PRICE.multiply(ORDER_COUNT));
+        assertThat(order.get().getOrderStatus()).isNotNull().isEqualTo(OrderStatus.PAYMENT_WAITING);
+        assertThat(order.get().getTotalAmounts()).isNotNull().isEqualTo(ITEM_PRICE.multiply(ORDER_COUNT));
+        assertThat(order.get().getOrderDate()).isNotNull();
+    }
+
+    @Test
+    @DisplayName("주문 취소 테스트")
+    void testOrderCancel() {
+        // given
+        final Long orderId = orderCommandService.order(memberId, itemId, ORDER_COUNT);
+
+        // when
+        orderCommandService.cancelOrder(orderId);
+        final Optional<Order> order = orderQueryService.getOrderById(orderId);
+
+        // then
+        assertThat(order).isPresent();
+        assertThat(order.get()).isNotNull();
+        assertThat(order.get().getId()).isNotNull().isEqualTo(orderId);
+        assertThat(order.get().getMember().getId()).isNotNull().isEqualTo(memberId);
+        assertThat(order.get().getMember().getEmail()).isNotNull().isEqualTo(MEMBER_EMAIL);
+        assertThat(order.get().getMember().getName()).isNotNull().isEqualTo(MEMBER_NAME);
+        assertThat(order.get().getOrderItems()).isNotEmpty().hasSize(1);
+        assertThat(order.get().getOrderItems().get(0).getItem().getId()).isNotNull().isEqualTo(itemId);
+        assertThat(order.get().getOrderItems().get(0).getItem().getName()).isNotNull().isEqualTo(ITEM_NAME);
+        assertThat(order.get().getOrderItems().get(0).getItem().getPrice()).isNotNull().isEqualTo(ITEM_PRICE);
+        assertThat(order.get().getOrderItems().get(0).getItem().getStockQuantity()).isNotNull().isEqualTo(ITEM_STOCK_QUANTITY);
+        assertThat(order.get().getOrderItems().get(0).getOrderPrice()).isNotNull().isEqualTo(ITEM_PRICE);
+        assertThat(order.get().getOrderItems().get(0).getCount()).isNotNull().isEqualTo(ORDER_COUNT);
+        assertThat(order.get().getOrderItems().get(0).getAmounts()).isNotNull().isEqualTo(ITEM_PRICE.multiply(ORDER_COUNT));
+        assertThat(order.get().getOrderStatus()).isNotNull().isEqualTo(OrderStatus.CANCEL);
+        assertThat(order.get().getTotalAmounts()).isNotNull().isEqualTo(ITEM_PRICE.multiply(ORDER_COUNT));
+        assertThat(order.get().getOrderDate()).isNotNull();
+    }
+
     private Long saveMember(MemberJpaRepository memberJpaRepository) {
         return memberJpaRepository.saveAndFlush(
             MemberEntity.builder()
