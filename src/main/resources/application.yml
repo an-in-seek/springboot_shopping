@@ -25,8 +25,12 @@ spring:
         format_sql: false
 
 api:
-  url: http://localhost:8080
-  api-key: TEST_API_KEY
+  email:
+    url: http://localhost:8081
+    api-key: EMAIL_API_KEY
+  push:
+    url: http://localhost:8082
+    api-key: PUSH_API_KEY
 
 decorator:
   datasource:

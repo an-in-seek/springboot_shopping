@@ -5,8 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-@ConfigurationProperties(prefix = "api")
-public record ApiProperties(
+@ConfigurationProperties(prefix = "api.push")
+public record PushApiProperties(
     @NotEmpty String url,
     @NotEmpty String apiKey
 ) {
