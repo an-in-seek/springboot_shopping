@@ -18,7 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@DisplayName("Order 도메인 테스트")
+@DisplayName("주문(Order) 도메인 테스트")
 class OrderDomainTest extends IntegrationTest {
 
     @Autowired
