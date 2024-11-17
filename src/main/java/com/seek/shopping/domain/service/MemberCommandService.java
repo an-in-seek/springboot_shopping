@@ -18,7 +18,7 @@ public class MemberCommandService {
     private final MemberJpaRepository memberJpaRepository;
 
     public Member createMember(String username, String email) {
-        // 도메인 모델을 통해 유효성 검사를 포함한 비즈니스 로직 수행
+        // Member 정보 생성 비지니스 로직 수행
         Member member = Member.create(username, email);
 
         // 비즈니스 로직 처리 후 MemberEntity로 변환하여 저장
@@ -29,15 +29,10 @@ public class MemberCommandService {
     }
 
     public Member updateMemberEmail(Long memberId, String newEmail) {
-        // Email 검증
-        if (!Member.isValidEmail(newEmail)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email format");
-        }
-
         // memberId로 Member 정보 조회
         Member member = memberJpaRepository.findById(memberId)
             .map(MemberMapper::toDomainModel)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, memberId + "가 존재하지 않습니다."));
 
         // 도메인 모델을 통해 Email 변경 비즈니스 로직 수행
         Member updatedUser = member.updateEmail(newEmail);

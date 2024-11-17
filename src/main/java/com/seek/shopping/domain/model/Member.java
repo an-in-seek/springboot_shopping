@@ -7,6 +7,9 @@ import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
+import org.springframework.web.server.ResponseStatusException;
 
 @Getter
 @SuperBuilder
@@ -14,11 +17,8 @@ import lombok.experimental.SuperBuilder;
 public class Member extends BaseDomainModel {
 
     private Long id;
-
     private String name;
-
     private String email;
-
     private Address address;
 
     @Default
@@ -31,20 +31,25 @@ public class Member extends BaseDomainModel {
     }
 
     public static Member create(String username, String email) {
-        if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("Username cannot be null or blank");
-        }
-        if (email == null || !email.contains("@")) {
-            throw new IllegalArgumentException("Invalid email format");
-        }
+        validateUsername(username);
+        validateEmail(email);
         return new Member(null, username, email);
     }
 
-    public static boolean isValidEmail(String email) {
-        return email != null && email.contains("@");
+    public Member updateEmail(String newEmail) {
+        validateEmail(newEmail);
+        return new Member(this.id, this.name, newEmail);
     }
 
-    public Member updateEmail(String newEmail) {
-        return new Member(this.id, this.name, newEmail);
+    private static void validateUsername(String username) {
+        if (!StringUtils.hasText(username)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "username은 필수 값입니다.");
+        }
+    }
+
+    private static void validateEmail(String email) {
+        if (!StringUtils.hasText(email) || !email.contains("@")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 email 형식입니다.");
+        }
     }
 }

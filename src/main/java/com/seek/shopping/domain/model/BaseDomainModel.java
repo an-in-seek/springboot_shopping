@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @MappedSuperclass
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BaseDomainModel {
+public abstract class BaseDomainModel {
 
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
