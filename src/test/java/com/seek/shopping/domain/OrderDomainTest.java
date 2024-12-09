@@ -139,7 +139,7 @@ class OrderDomainTest extends IntegrationTest {
         assertThat(order.get().getOrderItems().get(0).getOrderPrice()).isNotNull().isEqualTo(ITEM_PRICE);
         assertThat(order.get().getOrderItems().get(0).getCount()).isNotNull().isEqualTo(ORDER_COUNT);
         assertThat(order.get().getOrderItems().get(0).getAmounts()).isNotNull().isEqualTo(ITEM_PRICE.multiply(ORDER_COUNT));
-        assertThat(order.get().getOrderStatus()).isNotNull().isEqualTo(OrderStatus.CANCEL);
+        assertThat(order.get().getOrderStatus()).isNotNull().isEqualTo(OrderStatus.CANCELLED);
         assertThat(order.get().getTotalAmounts()).isNotNull().isEqualTo(ITEM_PRICE.multiply(ORDER_COUNT));
         assertThat(order.get().getOrderDate()).isNotNull();
     }
