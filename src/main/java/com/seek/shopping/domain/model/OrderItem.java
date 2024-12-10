@@ -1,14 +1,11 @@
 package com.seek.shopping.domain.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem extends BaseDomainModel {
 
     private Long id;
@@ -24,7 +21,7 @@ public class OrderItem extends BaseDomainModel {
 
     private Money amounts;
 
-    public static OrderItem createOrderItem(Item item, Money orderPrice, int count) {
+    public static OrderItem create(Item item, Money orderPrice, int count) {
         OrderItem orderItem = OrderItem.builder()
             .item(item)
             .orderPrice(orderPrice)

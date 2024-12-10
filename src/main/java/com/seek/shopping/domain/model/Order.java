@@ -33,7 +33,7 @@ public class Order extends BaseDomainModel {
 
     private LocalDateTime orderDate;
 
-    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+    public static Order create(Member member, Delivery delivery, OrderItem... orderItems) {
         Order order = Order.builder()
             .member(member)
             .delivery(delivery)
@@ -78,7 +78,7 @@ public class Order extends BaseDomainModel {
     }
 
     public void cancel() {
-        if (this.delivery.getStatus() == DeliveryStatus.COMP) {
+        if (this.delivery.getStatus() == DeliveryStatus.DELIVERED) {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
         this.setOrderStatus(OrderStatus.CANCELLED);

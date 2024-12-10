@@ -1,6 +1,5 @@
 package com.seek.shopping.application;
 
-import com.seek.shopping.domain.model.Delivery;
 import com.seek.shopping.domain.model.Member;
 import com.seek.shopping.domain.model.Money;
 import com.seek.shopping.domain.model.Order;
@@ -14,7 +13,7 @@ public record OrderDto(
     Long id,
     Member member,
     List<OrderItemDto> orderItems,
-    Delivery delivery,
+    DeliveryDto delivery,
     OrderStatus orderStatus,
     Money totalAmounts,
     LocalDateTime orderDate,
@@ -27,7 +26,7 @@ public record OrderDto(
             .id(order.getId())
             .member(order.getMember())
             .orderItems(OrderItemDto.from(order.getOrderItems()))
-            .delivery(order.getDelivery())
+            .delivery(DeliveryDto.from(order.getDelivery()))
             .orderStatus(order.getOrderStatus())
             .totalAmounts(order.getTotalAmounts())
             .orderDate(order.getOrderDate())

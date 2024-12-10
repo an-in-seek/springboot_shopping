@@ -1,7 +1,6 @@
 package com.seek.shopping.domain.service;
 
 import com.seek.shopping.domain.model.Delivery;
-import com.seek.shopping.domain.model.DeliveryStatus;
 import com.seek.shopping.domain.model.Item;
 import com.seek.shopping.domain.model.Member;
 import com.seek.shopping.domain.model.Order;
@@ -40,13 +39,13 @@ public class OrderCommandService {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 Item 입니다."));
 
         //배송정보 생성
-        Delivery delivery = Delivery.of(member.getAddress(), DeliveryStatus.READY);
+        Delivery delivery = Delivery.create(member.getAddress());
 
         //주문상품 생성
-        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
+        OrderItem orderItem = OrderItem.create(item, item.getPrice(), count);
 
         //주문 생성
-        Order order = Order.createOrder(member, delivery, orderItem);
+        Order order = Order.create(member, delivery, orderItem);
 
         //주문 저장
         OrderEntity orderEntity = OrderMapper.toEntity(order);
